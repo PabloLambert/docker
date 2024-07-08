@@ -1,0 +1,13 @@
+docker pull ubuntu:latest
+docker run -it ubuntu:latest /bin/bash
+
+
+docker build -t test:latest .
+docker run -d --name web1 --publish 8080:8080 test:latest
+
+docker build -t ddd-book:ch8.1 .
+docker run -d --name web1 --publish 8080:8080 test:latest
+
+
+docker ps -a
+docker images
