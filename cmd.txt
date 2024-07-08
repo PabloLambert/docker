@@ -4,10 +4,17 @@ docker run -it ubuntu:latest /bin/bash
 
 docker build -t test:latest .
 docker run -d --name web1 --publish 8080:8080 test:latest
+docker exec -it web1 /bin/bash
 
 docker build -t ddd-book:ch8.1 .
-docker run -d --name web1 --publish 8080:8080 test:latest
+docker run -d --name c1 --publish 8080:8080 ddd-book:ch8.1
+docker tag ddd-book:ch8.1 pablolambert/ddd-book:ch8.1
+docker push pablolambert/ddd-book:ch8.1
 
 
 docker ps -a
 docker images
+docker compose 
+docker volume ls 
+docker network ls
+

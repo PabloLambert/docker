@@ -1,0 +1,42 @@
+networks:
+  private-net:
+
+volumes:
+  data-vol:
+
+services:
+  web-fe:
+    build: 
+      context: web-fe
+      dockerfile: Dockerfile  
+    networks:
+      - private-net
+    ports:
+      - target: 3000
+        published: 8080
+
+  app-be:
+    build: 
+      context: app-be
+      dockerfile: Dockerfile
+    networks:
+      - private-net
+    ports:
+      - target: 3000
+        published: 8081
+  
+  db:
+    image: mysql:8.0
+    networks:
+      - private-net
+    volumes:
+      - type: volume
+        source: data-vol
+        target: /var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: mydb
+    ports:
+      - target: 3306
+        published: 3306
+
